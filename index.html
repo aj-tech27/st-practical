@@ -1,0 +1,899 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ST Practical Code Copy</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;font-family:Arial,sans-serif;background:#0b1020;color:#eef2ff}
+header{position:sticky;top:0;z-index:10;background:#111936dd;backdrop-filter:blur(12px);padding:18px 20px;border-bottom:1px solid #293457}
+.top{max-width:1200px;margin:auto}
+h1{margin:0 0 5px;font-size:25px} .sub{color:#9da9c7;margin-bottom:14px}
+.search{width:100%;padding:13px 15px;border-radius:10px;border:1px solid #35415f;background:#080d1b;color:white;font-size:15px;outline:none}
+main{max-width:1200px;margin:24px auto;padding:0 16px}
+.card{background:#121a31;border:1px solid #293657;border-radius:14px;margin-bottom:22px;overflow:hidden;box-shadow:0 8px 30px #0003}
+.card-head{display:flex;justify-content:space-between;align-items:center;gap:15px;padding:15px 17px;border-bottom:1px solid #293657}
+.card-head>div{display:flex;align-items:center;gap:12px;min-width:0}
+.card h2{font-size:16px;margin:0;line-height:1.4}
+.num{background:#27365d;border-radius:8px;padding:7px 9px;font-weight:bold;color:#b9c8ff}
+.copy{border:0;background:#4f6df5;color:white;border-radius:8px;padding:10px 14px;font-weight:bold;cursor:pointer;white-space:nowrap}
+.copy:hover{background:#617df7} .copy.done{background:#16845a}
+pre{margin:0;padding:18px;overflow:auto;background:#080d18;color:#dce5ff;font-size:13px;line-height:1.55;tab-size:4}
+.empty{display:none;text-align:center;padding:40px;color:#aab5d0}
+footer{text-align:center;color:#7f8bab;padding:15px 0 35px;font-size:13px}
+@media(max-width:650px){.card-head{align-items:flex-start;flex-direction:column}.copy{width:100%}.card h2{font-size:14px}pre{font-size:12px}}
+</style>
+</head>
+<body>
+<header>
+<div class="top">
+<h1>🧪 ST Practical Code Copy</h1>
+<div class="sub">10 programs • Tap “Copy Code” to copy the complete source</div>
+<input class="search" id="search" placeholder="Search program..." oninput="filterCards()">
+</div>
+</header>
+<main>
+
+    <section class="card" data-title="1. prepare test case based on controls">
+      <div class="card-head">
+        <div><span class="num">01</span><h2>1. PREPARE TEST CASE BASED ON CONTROLS</h2></div>
+        <button class="copy" onclick="copyCode(this)">📋 Copy Code</button>
+      </div>
+      <pre><code>package labprogram1;
+import java.time.Duration;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.JavascriptExecutor;
+import io.github.bonigarcia.wdm.WebDriverManager;
+public class testcontrols {
+public static void main(String[] args) throws Exception {
+WebDriverManager.chromedriver().setup();
+
+WebDriver driver = new ChromeDriver();
+driver.manage().window().maximize();
+driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+driver.get(&quot;https://demoqa.com/automation-practice-form&quot;);
+driver.findElement(By.id(&quot;firstName&quot;)).sendKeys(&quot;Vinitha&quot;);
+driver.findElement(By.id(&quot;lastName&quot;)).sendKeys(&quot;A&quot;);
+driver.findElement(By.id(&quot;userEmail&quot;)).sendKeys(&quot;vinitha@gmail.com&quot;);
+System.out.println(&quot;Test Case 1 Passed : Text Boxes&quot;);
+WebElement female = driver.findElement(By.xpath(&quot;//label[text()=&#x27;Female&#x27;]&quot;));
+female.click();
+System.out.println(&quot;Test Case 2 Passed : Radio Button&quot;);
+driver.findElement(By.id(&quot;userNumber&quot;)).sendKeys(&quot;9876543210&quot;);
+
+System.out.println(&quot;Test Case 3 Passed : Mobile Number&quot;);
+driver.findElement(By.xpath(&quot;//label[text()=&#x27;Sports&#x27;]&quot;)).click();
+System.out.println(&quot;Test Case 4 Passed : Check Box&quot;);
+driver.findElement(By.id(&quot;currentAddress&quot;)).sendKeys(&quot;Coimbatore&quot;);
+System.out.println(&quot;Test Case 5 Passed : Address&quot;);
+Thread.sleep(2000);
+JavascriptExecutor js = (JavascriptExecutor) driver;
+WebElement submit = driver.findElement(By.id(&quot;submit&quot;));
+js.executeScript(&quot;arguments[0].scrollIntoView(true);&quot;, submit);
+Thread.sleep(1000);
+js.executeScript(&quot;arguments[0].click();&quot;, submit);
+System.out.println(&quot;Test Case 6 Passed : Submit Button&quot;);
+Thread.sleep(3000);
+driver.quit();
+}
+}</code></pre>
+    </section>
+    
+    <section class="card" data-title="2. test data in a flat file">
+      <div class="card-head">
+        <div><span class="num">02</span><h2>2. TEST DATA IN A FLAT FILE</h2></div>
+        <button class="copy" onclick="copyCode(this)">📋 Copy Code</button>
+      </div>
+      <pre><code>package seleniumdemo;
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.time.Duration;
+import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+import io.github.bonigarcia.wdm.WebDriverManager;
+public class DemoTextBox {
+public static void main(String[] args) throws Exception {
+BufferedReader br = new BufferedReader(new FileReader(&quot;testdata.txt&quot;));
+String name = br.readLine();
+String email = br.readLine();
+String current = br.readLine();
+String permanent = br.readLine();
+br.close();
+WebDriverManager.chromedriver().setup();
+WebDriver driver = new ChromeDriver();
+driver.manage().window().maximize();
+driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+driver.get(&quot;https://demoqa.com/text-box&quot;); 
+driver.findElement(By.id(&quot;userName&quot;)).sendKeys(name); 
+driver.findElement(By.id(&quot;userEmail&quot;)).sendKeys(email); 
+driver.findElement(By.id(&quot;currentAddress&quot;)).sendKeys(current); 
+driver.findElement(By.id(&quot;permanentAddress&quot;)).sendKeys(permanent); 
+JavascriptExecutor js = (JavascriptExecutor) driver; 
+WebElement submitBtn = driver.findElement(By.id(&quot;submit&quot;)); 
+js.executeScript(&quot;arguments[0].scrollIntoView(true);&quot;, submitBtn); 
+Thread.sleep(1000); 
+js.executeScript(&quot;arguments[0].click();&quot;, submitBtn); 
+String outputName = driver.findElement(By.id(&quot;name&quot;)).getText(); 
+String outputEmail = driver.findElement(By.id(&quot;email&quot;)).getText(); 
+String outputCurrent = 
+driver.findElement(By.xpath(&quot;//p[@id=&#x27;currentAddress&#x27;]&quot;)).getText(); 
+String outputPermanent = 
+driver.findElement(By.xpath(&quot;//p[@id=&#x27;permanentAddress&#x27;]&quot;)).getText(); 
+System.out.println(&quot;========= Submitted Details =========&quot;); 
+System.out.println(outputName); 
+System.out.println(outputEmail); 
+System.out.println(outputCurrent); 
+System.out.println(outputPermanent); 
+if(outputName.contains(name) 
+&amp;&amp; outputEmail.contains(email) 
+&amp;&amp; outputCurrent.contains(current) 
+&amp;&amp; outputPermanent.contains(permanent){
+ System.out.println(&quot;\nTEST CASE PASSED&quot;); 
+} 
+else { 
+System.out.println(&quot;\nTEST CASE FAILED&quot;); 
+} 
+Thread.sleep(3000); 
+driver.quit(); 
+} 
+}</code></pre>
+    </section>
+    
+    <section class="card" data-title="3. manual test case based on controls">
+      <div class="card-head">
+        <div><span class="num">03</span><h2>3. MANUAL TEST CASE BASED ON CONTROLS</h2></div>
+        <button class="copy" onclick="copyCode(this)">📋 Copy Code</button>
+      </div>
+      <pre><code>package Lab_program3;
+import java.util.Scanner;
+public class Stud_Grade {
+public static void main(String[] args) {
+Scanner scanner = new Scanner(System.in);
+// Step 1: Input student name
+System.out.print(&quot;Enter Student Name: &quot;);
+String studentName = scanner.nextLine();
+// Step 2: Input student percentage
+System.out.print(&quot;Enter Student Percentage: &quot;);
+double percentage = scanner.nextDouble();
+// Step 3: Verify and assign grade based on percentage
+char grade;
+if (percentage &gt;= 90 &amp;&amp; percentage &lt;= 100) {
+grade = &#x27;A&#x27;;
+} else if (percentage &gt;= 80 &amp;&amp; percentage &lt; 90) {
+grade = &#x27;B&#x27;;
+} else if (percentage &gt;= 70 &amp;&amp; percentage &lt; 80) {
+grade = &#x27;C&#x27;;
+} else if (percentage &gt;= 60 &amp;&amp; percentage &lt; 70) {
+grade = &#x27;D&#x27;;
+} else if (percentage &lt; 50 &amp;&amp; percentage &gt;= 0) {
+grade = &#x27;F&#x27;;
+} else {
+
+System.out.println(&quot;Invalid percentage entered.&quot;);
+return;
+}
+// Step 4: Output student name, percentage, and grade
+System.out.println(&quot;Student Name: &quot; + studentName);
+System.out.println(&quot;Student Percentage: &quot; + percentage + &quot;%&quot;);
+System.out.println(&quot;Student Grade: &quot; + grade);
+scanner.close();
+}
+}</code></pre>
+    </section>
+    
+    <section class="card" data-title="4. select students who scored more than 60">
+      <div class="card-head">
+        <div><span class="num">04</span><h2>4. SELECT STUDENTS WHO SCORED MORE THAN 60</h2></div>
+        <button class="copy" onclick="copyCode(this)">📋 Copy Code</button>
+      </div>
+      <pre><code>package Mytest;
+import java.util.InputMismatchException;
+import java.util.Scanner;
+public class percentageabove60 {
+public static void main(String[] args) {
+Scanner scanner = new Scanner(System.in);
+try {
+// TC01 - Verify number of students
+System.out.print(&quot;Enter the number of students: &quot;);
+int studentCount = scanner.nextInt();
+scanner.nextLine();
+if (studentCount &lt;= 0) {
+System.out.println(&quot;\nTC01 : FAIL&quot;);
+System.out.println(&quot;Number of students must be greater than zero.&quot;);
+return;
+}
+String[] names = new String[studentCount];
+int[] percentages = new int[studentCount];
+// Input Details
+for (int i = 0; i &lt; studentCount; i++) {
+System.out.println(&quot;\nStudent Detail &quot; + (i + 1));
+System.out.print(&quot;Enter Name: &quot;);
+names[i] = scanner.nextLine();
+System.out.print(&quot;Enter Percentage: &quot;);
+
+percentages[i] = scanner.nextInt();
+scanner.nextLine();
+}
+System.out.println(&quot;\n========== TEST CASE VERIFICATION ==========&quot;);
+// TC01
+System.out.println(&quot;TC01 - Verify Number of Students : PASS&quot;);
+// TC02
+boolean validName = true;
+for (String name : names) {
+if (name.trim().isEmpty()) {
+validName = false;
+break;
+}
+}
+if (validName)
+System.out.println(&quot;TC02 - Verify Student Name : PASS&quot;);
+else
+System.out.println(&quot;TC02 - Verify Student Name : FAIL&quot;);
+// TC03
+boolean validPercentage = true;
+for (int per : percentages) {
+if (per &lt; 0 || per &gt; 100) {
+validPercentage = false;
+break;
+}
+}
+if (validPercentage)
+System.out.println(&quot;TC03 - Verify Percentage Range (0-100) : PASS&quot;);
+else {
+System.out.println(&quot;TC03 - Verify Percentage Range (0-100) : FAIL&quot;);
+return;
+}
+
+// TC04
+System.out.println(&quot;\nStudents with Percentage Above 60&quot;);
+boolean found = false;
+for (int i = 0; i &lt; studentCount; i++) {
+if (percentages[i] &gt; 60) {
+System.out.println(names[i] + &quot; - &quot; + percentages[i] + &quot;%&quot;);
+found = true;
+}
+}
+if (found)
+System.out.println(&quot;TC04 - Verify Students Above 60 : PASS&quot;);
+else
+System.out.println(&quot;TC04 - Verify Students Above 60 : FAIL (No Student Above 60)&quot;);
+// TC05
+System.out.println(&quot;TC05 - Verify Program Execution : PASS&quot;);
+} catch (InputMismatchException e) {
+System.out.println(&quot;\nTC06 - Verify Invalid Input : PASS&quot;);
+System.out.println(&quot;Invalid input! Percentage must be numeric.&quot;);
+} finally {
+scanner.close();
+}
+}
+}</code></pre>
+    </section>
+    
+    <section class="card" data-title="5. login a specific web page">
+      <div class="card-head">
+        <div><span class="num">05</span><h2>5. LOGIN A SPECIFIC WEB PAGE</h2></div>
+        <button class="copy" onclick="copyCode(this)">📋 Copy Code</button>
+      </div>
+      <pre><code>POM.XML
+&lt;dependencies&gt;
+&lt;dependency&gt;
+&lt;groupId&gt;org.seleniumhq.selenium&lt;/groupId&gt;
+&lt;artifactId&gt;selenium-java&lt;/artifactId&gt;
+&lt;version&gt;4.33.0&lt;/version&gt;
+&lt;/dependency&gt;
+&lt;dependency&gt;
+&lt;groupId&gt;io.github.bonigarcia&lt;/groupId&gt;
+&lt;artifactId&gt;webdrivermanager&lt;/artifactId&gt;
+&lt;version&gt;5.9.2&lt;/version&gt;
+&lt;/dependency&gt;
+&lt;/dependencies&gt;
+
+MAVEN SOURCE CODE
+package My_Test;
+import java.time.Duration;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
+import io.github.bonigarcia.wdm.WebDriverManager;
+public class loginTest_01 {
+public static void main(String[] args) {
+WebDriverManager.chromedriver().setup();
+WebDriver driver = new ChromeDriver();
+driver.manage().window().maximize();
+driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+driver.get(&quot;https://opensource-demo.orangehrmlive.com/&quot;);
+driver.findElement(By.name(&quot;username&quot;)).sendKeys(&quot;Admin&quot;);
+driver.findElement(By.name(&quot;password&quot;)).sendKeys(&quot;admin123&quot;);
+driver.findElement(By.xpath(&quot;//button[@type=&#x27;submit&#x27;]&quot;)).click();
+String expectedTitle = &quot;OrangeHRM&quot;;
+
+String actualTitle = driver.getTitle();
+System.out.println(&quot;--------------------------------&quot;);
+if (actualTitle.contains(expectedTitle)) {
+System.out.println(&quot;TEST CASE PASSED&quot;);
+System.out.println(&quot;Login Successful&quot;);
+} else {
+System.out.println(&quot;TEST CASE FAILED&quot;);
+System.out.println(&quot;Login Failed&quot;);
+}
+System.out.println(&quot;Page Title : &quot; + actualTitle);
+System.out.println(&quot;--------------------------------&quot;);
+driver.quit();
+}
+}</code></pre>
+    </section>
+    
+    <section class="card" data-title="6. get number of list items in a list / combo box">
+      <div class="card-head">
+        <div><span class="num">06</span><h2>6. GET NUMBER OF LIST ITEMS IN A LIST / COMBO BOX</h2></div>
+        <button class="copy" onclick="copyCode(this)">📋 Copy Code</button>
+      </div>
+      <pre><code>MAVEN DEPENDENCIES
+&lt;dependencies&gt;
+&lt;dependency&gt;
+&lt;groupId&gt;org.seleniumhq.selenium&lt;/groupId&gt;
+&lt;artifactId&gt;selenium-java&lt;/artifactId&gt;
+&lt;version&gt;4.33.0&lt;/version&gt;
+&lt;/dependency&gt;
+&lt;dependency&gt;
+&lt;groupId&gt;io.github.bonigarcia&lt;/groupId&gt;
+&lt;artifactId&gt;webdrivermanager&lt;/artifactId&gt;
+&lt;version&gt;5.9.2&lt;/version&gt;
+&lt;/dependency&gt;
+&lt;/dependencies&gt;
+
+SOURCE CODE
+package labprogram006;
+import java.time.Duration;
+import java.util.List;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+import io.github.bonigarcia.wdm.WebDriverManager;
+public class combox {
+public static void main(String[] args) {
+WebDriverManager.chromedriver().setup();
+WebDriver driver = new ChromeDriver();
+driver.manage().window().maximize();
+
+driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+driver.get(&quot;https://testautomationpractice.blogspot.com/&quot;);
+List&lt;WebElement&gt; listItems = driver.findElements(
+By.xpath(&quot;//select[@id=&#x27;country&#x27;]/option&quot;));
+System.out.println(&quot;Total Number of Items: &quot; + listItems.size());
+System.out.println(&quot;\nItems in List Box:&quot;);
+for (WebElement item : listItems) {
+System.out.println(item.getText());
+}
+driver.quit();
+}
+}</code></pre>
+    </section>
+    
+    <section class="card" data-title="7. test a html program to implement a simple login form">
+      <div class="card-head">
+        <div><span class="num">07</span><h2>7. TEST A HTML PROGRAM TO IMPLEMENT A SIMPLE LOGIN FORM</h2></div>
+        <button class="copy" onclick="copyCode(this)">📋 Copy Code</button>
+      </div>
+      <pre><code>DEPENDENCIES CODE
+&lt;dependencies&gt;
+&lt;dependency&gt;
+&lt;groupId&gt;org.seleniumhq.selenium&lt;/groupId&gt;
+&lt;artifactId&gt;selenium-java&lt;/artifactId&gt;
+&lt;version&gt;4.33.0&lt;/version&gt;
+&lt;/dependency&gt;
+&lt;dependency&gt;
+&lt;groupId&gt;io.github.bonigarcia&lt;/groupId&gt;
+&lt;artifactId&gt;webdrivermanager&lt;/artifactId&gt;
+&lt;version&gt;5.9.2&lt;/version&gt;
+&lt;/dependency&gt;
+&lt;/dependencies&gt;
+
+HTML CODE
+&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+&lt;meta charset=&quot;UTF-8&quot;&gt;
+&lt;title&gt;Login Form&lt;/title&gt;
+&lt;style&gt;
+body{
+font-family:Arial;
+background:#f2f2f2;
+}
+.login{
+width:300px;
+margin:auto;
+
+margin-top:100px;
+padding:20px;
+background:white;
+border-radius:8px;
+box-shadow:0px 0px 10px gray;
+}
+input{
+width:95%;
+padding:10px;
+margin:8px;
+}
+button{
+width:100%;
+padding:10px;
+background:green;
+color:white;
+border:none;
+font-size:16px;
+}
+&lt;/style&gt;
+&lt;script&gt;
+function validate(){
+var u=document.getElementById(&quot;username&quot;).value;
+var p=document.getElementById(&quot;password&quot;).value;
+if(u==&quot;admin&quot; &amp;&amp; p==&quot;admin123&quot;){
+document.getElementById(&quot;msg&quot;).innerHTML=&quot;Login Successful&quot;;
+}
+
+else
+{
+document.getElementById(&quot;msg&quot;).innerHTML=&quot;Invalid Username or Password&quot;;
+}
+}
+&lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;div class=&quot;login&quot;&gt;
+&lt;h2 align=&quot;center&quot;&gt;Login&lt;/h2&gt;
+&lt;input type=&quot;text&quot; id=&quot;username&quot; placeholder=&quot;Username&quot;&gt;
+&lt;input type=&quot;password&quot; id=&quot;password&quot; placeholder=&quot;Password&quot;&gt;
+&lt;button onclick=&quot;validate()&quot;&gt;Login&lt;/button&gt;
+&lt;h3 id=&quot;msg&quot;&gt;&lt;/h3&gt;
+&lt;/div&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+
+SOURCE CODE
+package labprogram7;
+import java.io.File;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
+import io.github.bonigarcia.wdm.WebDriverManager;
+public class LoginFormTest {
+public static void main(String[] args) {
+WebDriverManager.chromedriver().setup();
+
+WebDriver driver = new ChromeDriver();
+driver.manage().window().maximize();
+File file = new File(&quot;src/main/resources/login.html&quot;);
+String url = &quot;file:///&quot; + file.getAbsolutePath().replace(&quot;\\&quot;, &quot;/&quot;);
+driver.get(url);
+driver.findElement(By.id(&quot;username&quot;)).sendKeys(&quot;admin&quot;);
+driver.findElement(By.id(&quot;password&quot;)).sendKeys(&quot;admin123&quot;);
+driver.findElement(By.tagName(&quot;button&quot;)).click();
+String result = driver.findElement(By.id(&quot;msg&quot;)).getText();
+System.out.println(&quot;Login Result : &quot; + result);
+if(result.equals(&quot;Login Successful&quot;))
+{
+System.out.println(&quot;TEST CASE PASSED&quot;);
+}
+else
+{
+System.out.println(&quot;TEST CASE FAILED&quot;);
+}
+driver.quit();
+}
+}</code></pre>
+    </section>
+    
+    <section class="card" data-title="8. html program using selenium webdriver with javascript for arithmetic operations">
+      <div class="card-head">
+        <div><span class="num">08</span><h2>8. HTML PROGRAM USING SELENIUM WEBDRIVER WITH JAVASCRIPT FOR ARITHMETIC OPERATIONS</h2></div>
+        <button class="copy" onclick="copyCode(this)">📋 Copy Code</button>
+      </div>
+      <pre><code>POM.XML
+&lt;project xmlns=&quot;http://maven.apache.org/POM/4.0.0&quot;
+xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;
+xsi:schemaLocation=&quot;http://maven.apache.org/POM/4.0.0
+https://maven.apache.org/xsd/maven-4.0.0.xsd&quot;&gt;
+&lt;modelVersion&gt;4.0.0&lt;/modelVersion&gt;
+&lt;groupId&gt;com.example&lt;/groupId&gt;
+&lt;artifactId&gt;ArithmeticTesting&lt;/artifactId&gt;
+&lt;version&gt;1.0&lt;/version&gt;
+&lt;properties&gt;
+&lt;maven.compiler.source&gt;21&lt;/maven.compiler.source&gt;
+&lt;maven.compiler.target&gt;21&lt;/maven.compiler.target&gt;
+&lt;/properties&gt;
+&lt;dependencies&gt;
+&lt;dependency&gt;
+&lt;groupId&gt;org.seleniumhq.selenium&lt;/groupId&gt;
+&lt;artifactId&gt;selenium-java&lt;/artifactId&gt;
+&lt;version&gt;4.35.0&lt;/version&gt;
+&lt;/dependency&gt;
+&lt;/dependencies&gt;
+&lt;/project&gt;
+
+SOURCE CODE
+package Labprogram8;
+import java.io.File;
+import java.io.FileWriter;
+import java.util.Scanner;
+import org.openqa.selenium.By;
+
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
+public class ArithmeticTest {
+static void wait1() {
+try {
+Thread.sleep(1000);
+} catch (Exception e) {
+Thread.currentThread().interrupt();
+}
+}
+static void test(WebDriver d, String button, String name, double expected) {
+d.findElement(By.id(button)).click();
+wait1();
+String value = d.findElement(By.id(&quot;result&quot;)).getAttribute(&quot;value&quot;);
+double actual = Double.parseDouble(value);
+boolean pass = Math.abs(actual - expected) &lt; 0.000001;
+System.out.println(name + &quot; | Expected: &quot; + expected + &quot; | Actual: &quot; + actual + &quot; | &quot; + (pass ? &quot;PASS&quot; :
+&quot;FAIL&quot;));
+}
+public static void main(String[] args) {
+Scanner sc = new Scanner(System.in);
+System.out.print(&quot;Enter Number 1: &quot;);
+double a = sc.nextDouble();
+System.out.print(&quot;Enter Number 2: &quot;);
+double b = sc.nextDouble();
+WebDriver driver = null;
+try {
+
+String html = &quot;&lt;html&gt;&lt;head&gt;&lt;title&gt;Arithmetic&lt;/title&gt;&quot; + &quot;&lt;script&gt;&quot; +
+&quot;function doAdd() {&quot; +
+&quot;var a=Number(document.getElementById(&#x27;num1&#x27;).value);&quot; +
+&quot;var b=Number(document.getElementById(&#x27;num2&#x27;).value);&quot; +
+&quot;document.getElementById(&#x27;result&#x27;).value=a+b;&quot; +
+&quot;}&quot; +
+&quot;function doSubtract() {&quot; +
+&quot;var a=Number(document.getElementById(&#x27;num1&#x27;).value);&quot; +
+&quot;var b=Number(document.getElementById(&#x27;num2&#x27;).value);&quot; +
+&quot;document.getElementById(&#x27;result&#x27;).value=a-b;&quot; +
+&quot;}&quot; +
+&quot;function doMultiply() {&quot; +
+&quot;var a=Number(document.getElementById(&#x27;num1&#x27;).value);&quot; +
+&quot;var b=Number(document.getElementById(&#x27;num2&#x27;).value);&quot; +
+&quot;document.getElementById(&#x27;result&#x27;).value=a*b;&quot; +
+&quot;}&quot; +
+&quot;function doDivide() {&quot; +
+&quot;var a=Number(document.getElementById(&#x27;num1&#x27;).value);&quot; +
+&quot;var b=Number(document.getElementById(&#x27;num2&#x27;).value);&quot; +
+&quot;if(b==0) {&quot; +
+&quot;document.getElementById(&#x27;result&#x27;).value=&#x27;Cannot divide by zero&#x27;;&quot; +
+&quot;} else {&quot; +
+&quot;document.getElementById(&#x27;result&#x27;).value=a/b;&quot; +
+&quot;}&quot; +
+&quot;}&quot; +
+&quot;&lt;/script&gt;&lt;/head&gt;&lt;body&gt;&quot; +
+
+&quot;&lt;h2&gt;Arithmetic Operations&lt;/h2&gt;&quot; +
+&quot;Number 1: &quot; + &quot;&lt;input type=&#x27;number&#x27; id=&#x27;num1&#x27;&gt;&lt;br&gt;&lt;br&gt;&quot; +
+&quot;Number 2: &quot; + &quot;&lt;input type=&#x27;number&#x27; id=&#x27;num2&#x27;&gt;&lt;br&gt;&lt;br&gt;&quot; +
+&quot;&lt;button id=&#x27;add&#x27; onclick=&#x27;doAdd()&#x27;&gt;Addition&lt;/button&gt;&quot; +
+&quot;&lt;button id=&#x27;subtract&#x27; onclick=&#x27;doSubtract()&#x27;&gt;Subtraction&lt;/button&gt;&quot; +
+&quot;&lt;button id=&#x27;multiply&#x27; onclick=&#x27;doMultiply()&#x27;&gt;Multiplication&lt;/button&gt;&quot; +
+&quot;&lt;button id=&#x27;divide&#x27; onclick=&#x27;doDivide()&#x27;&gt;Division&lt;/button&gt;&quot; +
+&quot;&lt;br&gt;&lt;br&gt;Result: &quot; + &quot;&lt;input type=&#x27;text&#x27; id=&#x27;result&#x27; readonly&gt;&quot; +
+&quot;&lt;/body&gt;&lt;/html&gt;&quot;;
+File file = new File(&quot;arithmetic.html&quot;);
+FileWriter writer = new FileWriter(file);
+writer.write(html);
+writer.close();
+driver = new ChromeDriver();
+driver.get(file.toURI().toString());
+wait1();
+driver.findElement(By.id(&quot;num1&quot;)).sendKeys(String.valueOf(a));
+wait1();
+driver.findElement(By.id(&quot;num2&quot;)).sendKeys(String.valueOf(b));
+wait1();
+System.out.println(&quot;\n========== AUTOMATED TESTING ==========&quot;);
+test(driver, &quot;add&quot;, &quot;TC1 Addition&quot;, a + b);
+test(driver, &quot;subtract&quot;, &quot;TC2 Subtraction&quot;, a - b);
+test(driver, &quot;multiply&quot;, &quot;TC3 Multiplication&quot;, a * b);
+if (b == 0) {
+driver.findElement(By.id(&quot;divide&quot;)).click();
+wait1();
+
+String actual = driver.findElement(By.id(&quot;result&quot;)).getAttribute(&quot;value&quot;);
+String expected = &quot;Cannot divide by zero&quot;;
+System.out.println( &quot;TC4 Division | Expected: &quot; + expected +
+&quot; | Actual: &quot; + actual +
+&quot; | &quot; + (actual.equals(expected) ? &quot;PASS&quot; : &quot;FAIL&quot;)
+);
+} else {
+test(driver, &quot;divide&quot;, &quot;TC4 Division&quot;, a / b);
+}
+System.out.println(&quot;======================================&quot;);
+System.out.println(&quot;AUTOMATED TEST COMPLETED&quot;);
+System.out.println(&quot;======================================&quot;);
+Thread.sleep(1000);
+driver.quit();
+System.out.println(&quot;Browser closed.&quot;);
+} catch (Exception e) {
+System.out.println(&quot;\nTEST EXECUTION FAILED&quot;);
+e.printStackTrace();
+if (driver != null) {
+driver.quit();
+}
+} finally {
+sc.close();
+}
+}
+}</code></pre>
+    </section>
+    
+    <section class="card" data-title="9. develop and test a program in ms excel for data driven wizard">
+      <div class="card-head">
+        <div><span class="num">09</span><h2>9. DEVELOP AND TEST A PROGRAM IN MS EXCEL FOR DATA DRIVEN WIZARD</h2></div>
+        <button class="copy" onclick="copyCode(this)">📋 Copy Code</button>
+      </div>
+      <pre><code>POM.XML
+&lt;project xmlns=&quot;http://maven.apache.org/POM/4.0.0&quot;
+xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;
+xsi:schemaLocation=&quot;http://maven.apache.org/POM/4.0.0
+https://maven.apache.org/xsd/maven-4.0.0.xsd&quot;&gt;
+&lt;modelVersion&gt;4.0.0&lt;/modelVersion&gt;
+&lt;groupId&gt;com.example&lt;/groupId&gt;
+&lt;artifactId&gt;ElectricityBillTest&lt;/artifactId&gt;
+&lt;version&gt;1.0&lt;/version&gt;
+&lt;properties&gt;
+&lt;maven.compiler.source&gt;17&lt;/maven.compiler.source&gt;
+&lt;maven.compiler.target&gt;17&lt;/maven.compiler.target&gt;
+&lt;/properties&gt;
+&lt;dependencies&gt;
+&lt;dependency&gt;
+&lt;groupId&gt;org.seleniumhq.selenium&lt;/groupId&gt;
+&lt;artifactId&gt;selenium-java&lt;/artifactId&gt;
+&lt;version&gt;4.35.0&lt;/version&gt;
+&lt;/dependency&gt;
+&lt;dependency&gt;
+&lt;groupId&gt;org.apache.poi&lt;/groupId&gt;
+&lt;artifactId&gt;poi-ooxml&lt;/artifactId&gt;
+&lt;version&gt;5.4.1&lt;/version&gt;
+&lt;/dependency&gt;
+&lt;/dependencies&gt;
+&lt;/project&gt;
+
+HTML CODE
+&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+&lt;title&gt;Shopping Discount Calculator&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;h2&gt;Online Shopping Discount Calculator&lt;/h2&gt;
+&lt;label&gt;Product:&lt;/label&gt;
+&lt;input type=&quot;text&quot; id=&quot;product&quot;&gt;&lt;br&gt;&lt;br&gt;
+&lt;label&gt;Price:&lt;/label&gt;
+&lt;input type=&quot;number&quot; id=&quot;price&quot;&gt;&lt;br&gt;&lt;br&gt;
+&lt;label&gt;Discount (%):&lt;/label&gt;
+&lt;input type=&quot;number&quot; id=&quot;discount&quot;&gt;&lt;br&gt;&lt;br&gt;
+&lt;button id=&quot;calculate&quot; onclick=&quot;calculatePrice()&quot;&gt; Calculate&lt;/button&gt;
+&lt;p id=&quot;result&quot;&gt;&lt;/p&gt;
+&lt;script&gt;
+function calculatePrice() {
+let price = Number(document.getElementById(&quot;price&quot;).value);
+let discount = Number(document.getElementById(&quot;discount&quot;).value);
+let finalPrice = price - (price * discount / 100);
+document.getElementById(&quot;result&quot;).innerHTML = finalPrice;
+}
+&lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+
+SOURCE CODE
+package labprogram;
+import java.io.FileInputStream;
+import java.nio.file.Paths;
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.ss.usermodel.Sheet;
+import org.apache.poi.ss.usermodel.Workbook;
+import org.apache.poi.ss.usermodel.WorkbookFactory;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
+public class ShoppingDataDrivenTest {
+public static void main(String[] args) throws Exception {
+WebDriver driver = new ChromeDriver();
+driver.manage().window().maximize();
+String excelPath = &quot;C:\Users\vinia\Downloads\ShoppingData.xlsx&quot;;
+String htmlPath = Paths.get(&quot;shopping.html&quot;).toAbsolutePath().toString();
+FileInputStream file = new FileInputStream(excelPath);
+Workbook workbook = WorkbookFactory.create(file);
+Sheet sheet = workbook.getSheetAt(0);
+for (int i = 1; i &lt;= sheet.getLastRowNum(); i++) {
+Row row = sheet.getRow(i);
+String product =row.getCell(0).getStringCellValue();
+double price =row.getCell(1).getNumericCellValue();
+double discount =row.getCell(2).getNumericCellValue();
+double expectedPrice =row.getCell(3).getNumericCellValue();
+driver.get(htmlPath);
+
+driver.findElement(By.id(&quot;product&quot;)).sendKeys(product);
+driver.findElement(By.id(&quot;price&quot;)).sendKeys(String.valueOf(price));
+driver.findElement(By.id(&quot;discount&quot;)).sendKeys(String.valueOf(discount));
+driver.findElement(By.id(&quot;calculate&quot;)).click();
+String result =driver.findElement(By.id(&quot;result&quot;)).getText();
+double actualPrice = Double.parseDouble(result);
+System.out.println(&quot;Product: &quot; + product + &quot; | Expected: &quot; + expectedPrice + &quot; | Actual: &quot; +
+actualPrice
+);
+if (expectedPrice == actualPrice) {
+System.out.println(&quot;RESULT: PASS&quot;);
+} else {
+System.out.println(&quot;RESULT: FAIL&quot;);
+}
+System.out.println(&quot;-----------------------------&quot;);
+}
+workbook.close();
+file.close();
+driver.quit();
+System.out.println(
+&quot;Shopping Data Driven Testing Completed.&quot;
+);
+}
+}</code></pre>
+    </section>
+    
+    <section class="card" data-title="10. write a test suite containing minimum four test case">
+      <div class="card-head">
+        <div><span class="num">10</span><h2>10. WRITE A TEST SUITE CONTAINING MINIMUM FOUR TEST CASE</h2></div>
+        <button class="copy" onclick="copyCode(this)">📋 Copy Code</button>
+      </div>
+      <pre><code>POM.XML
+&lt;project xmlns=&quot;http://maven.apache.org/POM/4.0.0&quot;
+xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;
+xsi:schemaLocation=&quot;http://maven.apache.org/POM/4.0.0
+https://maven.apache.org/xsd/maven-4.0.0.xsd&quot;&gt;
+&lt;modelVersion&gt;4.0.0&lt;/modelVersion&gt;
+&lt;groupId&gt;com.example&lt;/groupId&gt;
+&lt;artifactId&gt;SeleniumTestSuite&lt;/artifactId&gt;
+&lt;version&gt;1.0&lt;/version&gt;
+&lt;properties&gt;
+&lt;maven.compiler.source&gt;17&lt;/maven.compiler.source&gt;
+&lt;maven.compiler.target&gt;17&lt;/maven.compiler.target&gt;
+&lt;/properties&gt;
+&lt;dependencies&gt;
+&lt;dependency&gt;
+&lt;groupId&gt;org.seleniumhq.selenium&lt;/groupId&gt;
+&lt;artifactId&gt;selenium-java&lt;/artifactId&gt;
+&lt;version&gt;4.35.0&lt;/version&gt;
+&lt;/dependency&gt;
+&lt;/dependencies&gt;
+&lt;/project&gt;
+
+SOURCE CODE
+package testsuite;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
+
+public class TestSuite {
+static WebDriver driver;
+public static void wait1() {
+try {
+Thread.sleep(1000);
+} catch (InterruptedException e) {
+e.printStackTrace();
+}
+}
+public static void setUp() {
+driver = new ChromeDriver();
+driver.manage().window().maximize();
+driver.get(&quot;https://www.saucedemo.com/&quot;);
+wait1();
+}
+public static void testCase1_PageTitle() {
+String expectedTitle = &quot;Swag Labs&quot;;
+String actualTitle = driver.getTitle();
+if (actualTitle.equals(expectedTitle)) {
+System.out.println(&quot;TC01 - Page Title: PASS&quot;);
+} else {
+System.out.println(&quot;TC01 - Page Title: FAIL&quot;);
+}
+wait1();
+}
+public static void testCase2_UsernameField() {
+
+boolean result = driver.findElement(By.id(&quot;user-name&quot;)).isDisplayed();
+if (result) {
+System.out.println(&quot;TC02 - Username Field: PASS&quot;);
+} else {
+System.out.println(&quot;TC02 - Username Field: FAIL&quot;);
+}
+wait1();
+}
+public static void testCase3_InvalidLogin() {
+driver.findElement(By.id(&quot;user-name&quot;)).sendKeys(&quot;invalid_user&quot;);
+driver.findElement(By.id(&quot;password&quot;)).sendKeys(&quot;wrong_password&quot;);
+driver.findElement(By.id(&quot;login-button&quot;)).click();
+wait1();
+boolean errorDisplayed = driver.findElement(By.cssSelector(&quot;[data-test=&#x27;error&#x27;]&quot;)).isDisplayed();
+if (errorDisplayed) {
+System.out.println(&quot;TC03 - Invalid Login: PASS&quot;);
+} else {
+System.out.println(&quot;TC03 - Invalid Login: FAIL&quot;);
+}
+driver.navigate().refresh();
+wait1();
+}
+public static void testCase4_SuccessfulLogin() {
+driver.findElement(By.id(&quot;user-name&quot;)).sendKeys(&quot;standard_user&quot;);
+driver.findElement(By.id(&quot;password&quot;)).sendKeys(&quot;secret_sauce&quot;);
+driver.findElement(By.id(&quot;login-button&quot;)).click();
+wait1();
+
+boolean productsDisplayed = driver.findElement(By.className(&quot;title&quot;)).isDisplayed();
+if (productsDisplayed) {
+System.out.println(&quot;TC04 - Successful Login: PASS&quot;);
+} else {
+System.out.println(&quot;TC04 - Successful Login: FAIL&quot;);
+}
+wait1();
+}
+public static void main(String[] args) {
+System.out.println(&quot;================================&quot;);
+System.out.println(&quot; SELENIUM TEST SUITE&quot;);
+System.out.println(&quot;================================&quot;);
+setUp();
+testCase1_PageTitle();
+testCase2_UsernameField();
+testCase3_InvalidLogin();
+testCase4_SuccessfulLogin();
+System.out.println(&quot;--------------------------------&quot;);
+System.out.println(&quot;All test cases executed.&quot;);
+System.out.println(&quot;--------------------------------&quot;);
+wait1();
+driver.quit();
+System.out.println(&quot;Browser closed.&quot;);
+}
+}</code></pre>
+    </section>
+    
+<div class="empty" id="empty">No matching program found.</div>
+</main>
+<footer>ST Practical Collection • Ready for quick reference</footer>
+<script>
+function copyCode(button){
+ const code=button.closest('.card').querySelector('code').innerText;
+ navigator.clipboard.writeText(code).then(()=>{
+   const old=button.innerText;
+   button.innerText='✓ Copied!';
+   button.classList.add('done');
+   setTimeout(()=>{button.innerText=old;button.classList.remove('done')},1500);
+ }).catch(()=>{
+   const area=document.createElement('textarea');
+   area.value=code; document.body.appendChild(area); area.select();
+   document.execCommand('copy'); area.remove();
+   button.innerText='✓ Copied!';
+   setTimeout(()=>button.innerText='📋 Copy Code',1500);
+ });
+}
+function filterCards(){
+ const q=document.getElementById('search').value.toLowerCase().trim();
+ let shown=0;
+ document.querySelectorAll('.card').forEach(card=>{
+   const match=card.dataset.title.includes(q);
+   card.style.display=match?'block':'none';
+   if(match) shown++;
+ });
+ document.getElementById('empty').style.display=shown?'none':'block';
+}
+</script>
+</body>
+</html>
